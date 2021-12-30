@@ -13,6 +13,6 @@ class Reaction extends Model
 
     public function image()
     {
-        return $this->belongsTo(Image::class,'messageId');
+        return $this->belongsTo(Image::class);
     }
 }
