@@ -3,11 +3,16 @@
 namespace App\Models;
 
 
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Jenssegers\Mongodb\Eloquent\Model as Model;
 
 
-class Reaction extends Eloquent
+class Reaction extends Model
 {
     protected $connection = 'mongodb';
     protected $collection = 'komu_bwlreactions';
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class,'messageId');
+    }
 }
