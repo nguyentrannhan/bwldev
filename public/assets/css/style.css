@@ -1,0 +1,124 @@
+body {
+    background-color: #eeeeee;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300
+}
+
+.btn-reaction {
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    background-color: #ffffff;
+    border: 2px solid rgba(0, 0, 0, .1);
+    width: 60px;
+    margin-bottom: 5px;
+}
+
+.btn-reaction:hover {
+    background-color: #cecece
+}
+
+.btn-reaction:active {
+    background-color: #cecece;
+    transform: translateY(4px);
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+.ellipsis {
+    color: #a09c9c
+}
+
+hr {
+    color: #a09c9c;
+    margin-top: 4px;
+    margin-bottom: 8px
+}
+
+.three-dots {
+    margin-top: 3px;
+    cursor: pointer
+}
+
+.icons i {
+    font-size: 25px
+}
+
+.status small {
+    margin-right: 10px;
+    color: blue
+}
+
+#image {
+    background-color: #cecece;
+}
+
+#image img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 50%;
+}
+
+.ajax-load {
+    padding: 10px 0px;
+    width: 100%;
+}
+
+.list-reaction {
+    float: left;
+    margin-right: 5px;
+}
+
+.muted-color {
+    color: #a09c9c;
+    font-size: 13px
+}
+
+.rounded-image {
+    border-radius: 50% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px
+}
+
+.name {
+    font-weight: 600
+}
+
+.comment-text {
+    word-break: break-word;
+}
+
+.comments {
+    display: none;
+}
+
+.dropdown-toggle::before {
+    display: none !important;
+}
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.btn-dropdown {
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    background-color: #ffffff;
+    border: none;
+    margin-bottom: 5px;
+}
+
+.btn-dropdown:hover {
+    background-color: #cecece
+}
+
+.btn-dropdown:active {
+    background-color: #cecece;
+    transform: translateY(4px);
+}
