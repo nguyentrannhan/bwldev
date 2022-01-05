@@ -159,3 +159,12 @@ hr {
     padding: 10px 0;
     flex-grow: 1;
 }
+
+.main-content {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.navbar-header {
+    background-color: #ffffff !important;
+}
