@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function show(Request $request)
+    public function index(Request $request)
     {
         $images = Image::with('reactions')->orderBy('createdTimestamp', 'desc')->paginate(10);
 
