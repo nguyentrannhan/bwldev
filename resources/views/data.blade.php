@@ -1,15 +1,16 @@
-@foreach($images as $image)
+@foreach( $messages as $message )
     <div class="card">
         {{--header--}}
         <div id="header" class="d-flex justify-content-between p-2 px-3">
             <div class="d-flex flex-row align-items-center">
-                <img src="https://i.imgur.com/UXdKE3o.jpg" width="50" class="rounded-circle"
-                     alt="avatar">
-                <div class="d-flex flex-column ml-2"><span class="font-weight-bold">User Name</span>
+                <img src=" @if( $message->user->avatar == null ) {{ 'img/default-avatar.png' }}
+                        @else {{ $message->user->avatar }} @endif "
+                     width="50" class="rounded-circle" alt="avatar">
+                <div class="d-flex flex-column ml-2"><span class="font-weight-bold">{{ $message->user->username }}</span>
                 </div>
                 <div class="d-flex flex-row align-items-center ellipsis ml-3">
                     <small class="mr-2">
-                        {{gmdate('d/m/Y H:m:s', $image->createdTimestamp->__toString() / 1000)}}
+                        {{ gmdate('d/m/Y H:m:s', $message->createdTimestamp->__toString() / 1000) }}
                     </small>
                 </div>
             </div>
@@ -27,19 +28,19 @@
             </div>
         </div>
         {{--content--}}
-        @if(isset($image->links[0]))
+        @if( isset($message->links[0]) )
             <div id="image">
-                <img src="{{$image->links[0]}}" class="img-fluid" alt="{{$image->links[0]}}">
+                <img src="{{ $message->links[0] }}" class="img-fluid" alt="{{ $message->links[0] }}">
             </div>
         @endif
         {{--reaction--}}
         <div id="reaction" class="px-3 pt-3 pb-2 px-3">
             <div class="d-flex flex-row justify-content-between">
                 <ul class="list-inline flex-row align-items-center m-0">
-                    @foreach($image->reactions as $reaction)
+                    @foreach( $message->reactions as $reaction )
                         <li class="list-inline-item list-reaction">
                             <button class="btn btn-reaction">
-                                {{$reaction->emoji}}
+                                {{ $reaction->emoji }}
                             </button>
                         </li>
                     @endforeach
@@ -47,23 +48,36 @@
             </div>
         </div>
         {{--comment--}}
-{{--        <div class="px-2 pb-2 px-3">--}}
-{{--            <div data-id="{{ $image->id }}" class="show-comments d-flex flex-row muted-color">--}}
-{{--                <span>2 comments</span>--}}
-{{--            </div>--}}
-{{--            <div id="comments-{{ $image->id }}" class="comments">--}}
-{{--                <hr>--}}
-{{--                <div class="d-flex flex-row mb-2">--}}
-{{--                    <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">--}}
-{{--                    <div class="d-flex flex-column ml-2">--}}
-{{--                        <span class="name">User Name</span>--}}
-{{--                        <img src="https://i.imgur.com/9AZ2QX1.jpg" class="pb-1" style="max-width: 300px;">--}}
-{{--                        <small class="comment-text">--}}
-{{--                            This is comment--}}
-{{--                        </small>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        <div class="px-2 pb-2 px-3">
+            @if( $message->comments->count() > 0 )
+                <div data-id="{{ $message->id }}" class="show-comments d-flex flex-row muted-color">
+                    <span>{{ $message->comments->count() }}
+                        @if( $message->comments->count() > 1) {{ __('comments') }} @else {{ __('comment') }} @endif </span>
+                </div>
+            @endif
+            <div id="comments-{{ $message->id }}" class="comments">
+                <hr>
+                @foreach( $message->comments as $comment )
+                    <div class="d-flex flex-row mb-2">
+                        <img src=" @if( $comment->user->avatar == null ) {{ 'img/default-avatar.png' }}
+                        @else{{ $comment->user->avatar }}@endif" width="40" class="rounded-image" alt="avatar">
+                        <div class="d-flex flex-column ml-2">
+                            <span class="name">{{ $comment->user->username }}</span>
+                            @if( $comment->comment )
+                                <small class="comment-text pb-1">
+                                    {{ $comment->comment }}
+                                </small>
+                            @endif
+                            @if( !empty($comment->links) )
+                                @foreach( $comment->links as $commentImage )
+                                    <img src="{{ $commentImage }}" class="pb-1" style="max-width: 300px;"
+                                         alt="{{ $commentImage }}">
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 @endforeach
