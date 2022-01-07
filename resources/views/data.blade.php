@@ -1,36 +1,26 @@
+@php $discordAddress = 'https://cdn.discordapp.com/'; @endphp
+@php $ipAddress = 'http://172.16.11.90/'; @endphp
 @foreach( $messages as $message )
     <div class="card">
         {{--header--}}
-        <div id="header" class="d-flex justify-content-between p-2 px-3">
-            <div class="d-flex flex-row align-items-center">
+        <div id="header" class="header-flex justify-content-between p-2 px-3">
+            <div class="header-flex flex-row align-items-center">
                 <img src=" @if( $message->user->avatar == null ) {{ 'img/default-avatar.png' }}
-                        @else {{ $message->user->avatar }} @endif "
-                     width="50" class="rounded-circle" alt="avatar">
-                <div class="d-flex flex-column ml-2"><span class="font-weight-bold">{{ $message->user->username }}</span>
-                </div>
-                <div class="d-flex flex-row align-items-center ellipsis ml-3">
-                    <small class="mr-2">
-                        {{ gmdate('d/m/Y H:m:s', $message->createdTimestamp->__toString() / 1000) }}
-                    </small>
+                        @else {{ $discordAddress.'avatars/'.$message->user->id.'/'.$message->user->avatar }} @endif "
+                     width="50" class="rounded-circle mr-2" alt="avatar">
+                <div class="d-flex flex-column"><span class="font-weight-bold">{{ $message->user->username }}</span>
                 </div>
             </div>
             <div class="d-flex flex-row align-items-center ellipsis">
-                <div class="btn-group dropleft">
-                    <button type="button" class="btn btn-dropdown dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-ellipsis-h three-dots ellipsis"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        <button class="dropdown-item" type="button">Option 1</button>
-                        <button class="dropdown-item" type="button">Option 2</button>
-                        <button class="dropdown-item" type="button">Option 3</button>
-                    </div>
-                </div>
+                <small>
+                    {{ gmdate('d/m/Y H:m', $message->createdTimestamp->__toString() / 1000) }}
+                </small>
             </div>
         </div>
         {{--content--}}
         @if( isset($message->links[0]) )
             <div id="image">
-                <img src="{{ $message->links[0] }}" class="img-fluid" alt="{{ $message->links[0] }}">
+                <img src="{{ $ipAddress.$message->links[0] }}" class="img-fluid" alt="{{ $message->links[0] }}">
             </div>
         @endif
         {{--reaction--}}

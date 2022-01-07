@@ -6,20 +6,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BWL Channel</title>
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    <link href="{{'assets/css/bootstrap.min.css'}}" rel="stylesheet">
+    <link href="{{'assets/css/font-awesome.min.css'}}" rel="stylesheet">
+    <link href="{{'assets/css/style.css'}}" rel="stylesheet">
 </head>
 <body>
 {{--header--}}
-<nav class="navbar navbar-expand-md navbar-light bg-light navbar-header">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+<nav class="navbar navbar-expand-md navbar-light bg-light navbar-header nav-fixed-top">
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" >
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item ml-auto">
                 <a class="nav-link" href="{{ route('logout') }}">Logout</a>
             </li>
         </ul>
@@ -28,7 +29,7 @@
 {{--end header--}}
 <div class="container main-content">
     <div class="row d-flex align-items-center justify-content-center">
-        <div class="col-8">
+        <div class="col-lg-8 col-md-12 col-sm-12">
                 <div id="infinite-scroll">
                     @include('data')
                 </div>
@@ -50,7 +51,9 @@
 <script>
     var page = 1;
     $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+        var scrollHeight = $(document).height() - 0.55;
+        var scrollPosition = $(window).scrollTop() + $(window).height();
+        if (scrollPosition > scrollHeight) {
             page++;
             loadMoreData(page);
         }

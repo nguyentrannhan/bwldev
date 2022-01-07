@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
+    protected const PAGE_LIMIT = 10;
+
     public function index(Request $request)
     {
         $messages = Message::with([
@@ -20,7 +22,7 @@ class MainController extends Controller
                 unset($messages[$key]);
             }
         }
-        $mediaMessages = $messages->paginate(10);
+        $mediaMessages = $messages->paginate(self::PAGE_LIMIT);
 
         if ($request->ajax()) {
             $view = view('data', ['messages' => $mediaMessages])->render();
