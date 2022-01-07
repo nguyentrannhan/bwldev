@@ -10,7 +10,23 @@
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
 </head>
 <body>
-<div class="container mt-5 mb-5">
+{{--header--}}
+<nav class="navbar navbar-expand-md navbar-light bg-light navbar-header">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{{--end header--}}
+<div class="container main-content">
     <div class="row d-flex align-items-center justify-content-center">
         <div class="col-8">
                 <div id="infinite-scroll">

@@ -11,8 +11,8 @@ class Reaction extends Model
     protected $connection = 'mongodb';
     protected $collection = 'komu_bwlreactions';
 
-    public function image()
+    public function message()
     {
-        return $this->belongsTo(Image::class);
+        return $this->belongsTo(Message::class);
     }
 }

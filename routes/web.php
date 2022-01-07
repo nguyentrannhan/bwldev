@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\OAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class, 'show']);
+Route::get('login', [LoginController::class, 'login'])->name('login')->middleware('CheckLogout');
+Route::get('/confirm-login', [OAuthController::class, 'confirmLogin']);
+Route::get('/', [MainController::class, 'index'])->name("index")->middleware('CheckLogin');
+Route::get('/logout', [LoginController::class, 'logout'])->name("logout");
