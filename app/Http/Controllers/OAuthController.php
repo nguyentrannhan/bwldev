@@ -65,10 +65,6 @@ class OAuthController extends Controller
                 'username' => $userData->username,
                 'discriminator' => $userData->discriminator,
                 'avatar' => $userData->avatar,
-                'verified' => $userData->verified,
-                'locale' => $userData->locale,
-                'mfa_enabled' => $userData->mfa_enabled,
-                'refresh_token' => $accessTokenData->refresh_token,
             ]);
             return $user;
         }
