@@ -15,11 +15,11 @@ class OAuthController extends Controller
     protected $tokenURL = "https://discord.com/api/oauth2/token";
     protected $apiURLBase = "https://discord.com/api/users/@me";
     protected $tokenData = [
-        "client_id" => null,
-        "client_secret" => null,
-        "grant_type" => "authorization_code",
-        "code" => null,
-        "redirect_uri" => null,
+        'client_id' => null,
+        'client_secret' => null,
+        'grant_type' => 'authorization_code',
+        'code' => null,
+        'redirect_uri' => null,
         "scope" => "identify"
     ];
 
@@ -36,20 +36,17 @@ class OAuthController extends Controller
 
         $client = new Client();
         try {
-            $accessTokenData = $client->post($this->tokenURL, ["form_params" => $this->tokenData]);
+            $accessTokenData = $client->post($this->tokenURL, ['form_params' => $this->tokenData, 'verify' => false]);
             $accessTokenData = json_decode($accessTokenData->getBody());
         } catch (GuzzleException $e) {
             Log::error($e);
             return redirect()->route("login");
         }
 
-        $userData = Http::withToken($accessTokenData->access_token)->get($this->apiURLBase);
-        if ($userData->clientError() || $userData->serverError()) {
-            return redirect()->route("login");
-        };
 
-        $userData = json_decode($userData);
-        $user = $this->saveUser($userData, $accessTokenData);
+        $userData = $client->get($this->apiURLBase, ['headers' => ['Authorization' => 'Bearer ' . $accessTokenData->access_token], 'verify' => false]);
+        $userData = json_decode($userData->getBody());
+        $user = $this->saveUser($userData);
         if ($user) {
             Auth::login($user);
             return redirect()->route("index");
@@ -57,7 +54,7 @@ class OAuthController extends Controller
         return redirect()->route("login");
     }
 
-    public function saveUser($userData, $accessTokenData)
+    public function saveUser($userData)
     {
         $user = User::where('id', $userData->id)->first();
         if ($user) {
