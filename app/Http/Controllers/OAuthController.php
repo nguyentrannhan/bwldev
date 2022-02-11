@@ -64,7 +64,13 @@ class OAuthController extends Controller
                 'avatar' => $userData->avatar,
             ]);
             return $user;
+        } else {
+            $user = new User;
+            $user->username  = $userData->username;
+            $user->discriminator  = $userData->discriminator;
+            $user->avatar  = $userData->avatar;
+            $user->save();
+            return $user;
         }
-        return null;
     }
 }
