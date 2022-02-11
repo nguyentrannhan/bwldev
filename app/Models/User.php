@@ -9,16 +9,12 @@ class User extends Authenticatable
 {
     use Notifiable;
     protected $connection = 'mongodb';
-    protected $collection = 'komu_bwlusers';
+    protected $collection = 'komu_users';
 
     protected $fillable = [
         'id',
         'username',
         'discriminator',
-        'avatar',
-        'verified',
-        'locale',
-        'mfa_enabled',
-        'refresh_token'
+        'avatar'
     ];
 }

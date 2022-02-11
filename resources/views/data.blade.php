@@ -1,5 +1,5 @@
 @php $discordAddress = 'https://cdn.discordapp.com/'; @endphp
-@php $ipAddress = 'http://172.16.11.90/'; @endphp
+@php $ipAddress = 'http://172.16.11.111/'; @endphp
 @foreach( $messages as $message )
     <div class="card">
         {{--header--}}
